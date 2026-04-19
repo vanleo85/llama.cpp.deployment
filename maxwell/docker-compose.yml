@@ -17,27 +17,13 @@ services:
     volumes:
       - ${MODELS_VOLUME}
     environment:
-      - MODEL_PATH=${BGE_M3_MODEL_PATH}
+      - LLAMA_ARG_MODEL=${BGE_M3_MODEL_PATH}
       - LLAMA_ARG_N_GPU_LAYERS=99
       - LLAMA_ARG_CTX_SIZE=4096
       - LLAMA_ARG_HOST=0.0.0.0
       - LLAMA_ARG_PORT=8080
       - LLAMA_API_KEY=${API_KEY:-your_secret_key}
-#      - CTX_SIZE=${CTX_SIZE_4K}
-#      - API_KEY=${API_KEY}
     command:
-      - -m
-      - ${MODEL_PATH}
-#      - -ngl
-#      - "${NGL}"
-#      - -c
-#      - "${CTX_SIZE}"
-#      - --host
-#      - 0.0.0.0
-#      - --port
-#      - "8080"
-#      - --api-key
-#      - "${API_KEY}"
       - --embedding
 
   bge-reranker-v2-m3:
@@ -56,31 +42,16 @@ services:
     volumes:
       - ${MODELS_VOLUME}
     environment:
-      - MODEL_PATH=${BGE_RERANKER_MODEL_PATH}
-      - NGL=${NGL_99}
-      - CTX_SIZE=${CTX_SIZE_4K}
-      - API_KEY=${API_KEY}
-      - UBATCH_SIZE=${UBATCH_SIZE}
-      - BATCH_SIZE=${BATCH_SIZE}
+      - LLAMA_ARG_MODEL=${BGE_RERANKER_MODEL_PATH}
+      - LLAMA_ARG_N_GPU_LAYERS=99
+      - LLAMA_ARG_CTX_SIZE=4096
+      - LLAMA_ARG_HOST=0.0.0.0
+      - LLAMA_ARG_PORT=8080
+      - LLAMA_API_KEY=${API_KEY:-your_secret_key}
+      - LLAMA_ARG_UBATCH=${UBATCH_SIZE}
+      - LLAMA_ARG_BATCH=${BATCH_SIZE}
+      - LLAMA_ARG_N_PARALLEL={NP:-1}
     command:
-      - -m
-      - ${MODEL_PATH}
-      - -ngl
-      - "${NGL}"
-      - --host
-      - 0.0.0.0
-      - --port
-      - "8080"
-      - --api-key
-      - "${API_KEY}"
-      - -c
-      - "${CTX_SIZE}"
-      - --ubatch-size
-      - "${UBATCH_SIZE}"
-      - --batch-size
-      - "${BATCH_SIZE}"
-      - -np
-      - "1"
       - --rerank
       - --embedding
       - --pooling
@@ -102,20 +73,9 @@ services:
     volumes:
       - ${MODELS_VOLUME}
     environment:
-      - MODEL_PATH=${LLAMA_31_8B_MODEL_PATH}
-      - NGL=${NGL_99}
-      - CTX_SIZE=${CTX_SIZE_8K}
-      - API_KEY=${LLAMA_API_KEY}
-    command:
-      - -m
-      - ${MODEL_PATH}
-      - -ngl
-      - "${NGL}"
-      - -c
-      - "${CTX_SIZE}"
-      - --host
-      - 0.0.0.0
-      - --port
-      - "8080"
-      - --api-key
-      - "${API_KEY}"
+      - LLAMA_ARG_MODEL=${LLAMA_31_8B_MODEL_PATH}
+      - LLAMA_ARG_N_GPU_LAYERS=99
+      - LLAMA_ARG_CTX_SIZE=${CTX_SIZE_8K}
+      - LLAMA_ARG_HOST=0.0.0.0
+      - LLAMA_ARG_PORT=8080
+      - LLAMA_API_KEY=${API_KEY:-your_secret_key}
