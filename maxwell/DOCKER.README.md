@@ -22,7 +22,7 @@ docker run --name llama-31-8b-q6k --gpus all -d -p 8090:8080 \
   -v /home/l-vanin/.cache/huggingface/hub:/models \
   llama-server-cuda:11.8.0-22.04 \
   -m /models/models--bartowski--Meta-Llama-3.1-8B-Instruct-GGUF/snapshots/bf5b95e96dac0462e2a09145ec66cae9a3f12067/Meta-Llama-3.1-8B-Instruct-Q6_K.gguf \
-  -ngl 99 -c 8192 --host 0.0.0.0 --port 8080 --api-key "123465"
+  -ngl 99 -c 8192 --host 0.0.0.0 --port 8080 --api-key "your_secret_key"
 
 
 

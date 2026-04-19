@@ -27,3 +27,12 @@ sudo systemctl start docker
 ## Установка nvidia-cuda-toolkit
 sudo apt install nvidia-cuda-toolkit
 
+
+## Настройка gpu сервера
+
+### Включаем режим постоянного управления (Persistence Mode)
+sudo nvidia-smi -pm 1
+
+### Ограничиваем максимальное энергопотребление (например, до 180W вместо 250W)
+### Это снизит температуру на 10-15 градусов при потере производительности всего 5-7%
+sudo nvidia-smi -pl 180
