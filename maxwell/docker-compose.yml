@@ -47,13 +47,14 @@ services:
       - LLAMA_ARG_CTX_SIZE=${BGE_RERANKER_CTX_SIZE}
       - LLAMA_ARG_HOST=0.0.0.0
       - LLAMA_ARG_PORT=8080
+      - LLAMA_ARG_TIMEOUT=3600
+      - LLAMA_ARG_THREADS_HTTP=4
       - LLAMA_API_KEY=${API_KEY:-your_secret_key}
       - LLAMA_ARG_UBATCH=${BGE_RERANKER_UBATCH_SIZE}
       - LLAMA_ARG_BATCH=${BGE_RERANKER_BATCH_SIZE}
       - LLAMA_ARG_N_PARALLEL=${BGE_RERANKER_N_PARALLEL}
     command:
       - --rerank
-      - --embedding
       - --pooling
       - rank
 
