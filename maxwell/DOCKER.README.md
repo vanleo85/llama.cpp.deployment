@@ -16,7 +16,7 @@ docker run --name bge-reranker-v2-m3 --gpus all -d -p 8081:8080 \
   -v /home/l-vanin/.cache/huggingface/hub:/models \
   llama-server-cuda:11.8.0-22.04 \
   -m /models/models--gpustack--bge-reranker-v2-m3-GGUF/snapshots/3093af03b1a635e67b084b1d8c03c5f5e020fd05/bge-reranker-v2-m3-Q8_0.gguf \
-  -ngl 99 --host 0.0.0.0 --port 8080 --api-key "your_secret_key" -c 4096 --ubatch-size 4096 --batch-size 4096 -np 1 --rerank --embedding --pooling rank
+  -ngl 99 --host 0.0.0.0 --port 8080 --api-key "your_secret_key" -c 4096 --ubatch-size 4096 --batch-size 4096 -np 1 --rerank --pooling rank
 
 docker run --name llama-31-8b-q6k --gpus all -d -p 8090:8080 \
   -v /home/l-vanin/.cache/huggingface/hub:/models \
