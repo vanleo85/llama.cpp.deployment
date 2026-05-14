@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   bge-m3:
+    profiles: ["rag"]
     image: llama-server-cuda:11.8.0-22.04
     container_name: bge-m3
     restart: unless-stopped
@@ -27,6 +28,7 @@ services:
       - --embedding
 
   bge-reranker-v2-m3:
+    profiles: ["rag"]
     image: llama-server-cuda:11.8.0-22.04
     container_name: bge-reranker-v2-m3
     restart: unless-stopped
@@ -60,6 +62,7 @@ services:
       - rank
 
   llama-31-8b-q6k:
+    profiles: ["llama"]
     image: llama-server-cuda:11.8.0-22.04
     container_name: llama-31-8b-q6k
     restart: unless-stopped
@@ -82,3 +85,32 @@ services:
       - LLAMA_ARG_HOST=0.0.0.0
       - LLAMA_ARG_PORT=8080
       - LLAMA_API_KEY=${API_KEY:-your_secret_key}
+
+
+  Qwen2.5-7B-Instruct-1M-Q5_K_M:
+    profiles: ["qwen"]
+    image: llama-server-cuda:11.8.0-22.04
+    container_name: qwen2.5-7b-instruct-1m-q5_k_m
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    ports:
+      - "8091:8080"
+    volumes:
+      - ${MODELS_VOLUME}
+    environment:
+      - LLAMA_ARG_MODEL=${QWEN25_7B_MODEL_PATH}
+      - LLAMA_ARG_ALIAS=${QWEN25_7B_MODEL_ALIAS}
+      - LLAMA_ARG_N_GPU_LAYERS=99
+      - LLAMA_ARG_CTX_SIZE=16384
+      - LLAMA_ARG_BATCH_SIZE=512
+      - LLAMA_ARG_N_PARALLEL=4
+      - LLAMA_ARG_HOST=0.0.0.0
+      - LLAMA_ARG_PORT=8080
+      - LLAMA_API_KEY=${API_KEY:-your_secret_key}
+
