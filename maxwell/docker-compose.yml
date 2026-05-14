@@ -76,6 +76,7 @@ services:
       - ${MODELS_VOLUME}
     environment:
       - LLAMA_ARG_MODEL=${LLAMA_31_8B_MODEL_PATH}
+      - LLAMA_ARG_ALIAS=${LLAMA_31_8B_MODEL_ALIAS}
       - LLAMA_ARG_N_GPU_LAYERS=99
       - LLAMA_ARG_CTX_SIZE=${CTX_SIZE_8K}
       - LLAMA_ARG_HOST=0.0.0.0
